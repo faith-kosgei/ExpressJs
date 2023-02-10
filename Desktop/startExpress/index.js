@@ -1,13 +1,9 @@
 const express = require("express");
 const path = require("path");
 const logger = require("./middleware/logger");
-
-
+const member = require('./routes/api/members'); 
 
 const app = express();
-
-
-
 // Init middleware
 // app.use(logger);
 
@@ -16,8 +12,8 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 
 // members API Routes
-app.use('app/members', require('./routes/api/members'))
+app.use('/api', member);
 
-const PORT = process.env.PORT || 5000;
+const PORT = 3000;
 
 app.listen(PORT, () => console.log(`Server started on port${PORT}`));

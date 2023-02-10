@@ -1,12 +1,15 @@
 const express = require('express')
 const router = express.Router();
 const members = require("../../Members");
+// const fs = require('fs');
+
+let newdata = [];
 
 // gets all members  
 router.get("/", (req, res) => res.json(members));
 
 // get a single member
-router.get("/:id", (req, res) => {
+router.get("/members", (req, res) => {
     const found = members.some(member => member.id === parseInt(req.params.id))
 
     if(found){
@@ -18,8 +21,21 @@ router.get("/:id", (req, res) => {
 });
 
 // Create a Member
-router.post('/', (req, res) =>{
-    res.send(res.body);
+router.post('/new', (req, res) =>{
+    //const email = req.body.name; 
+  
+  //fiiiirst save reqq data on an arrya data
+    let data = req.body; 
+    newdata.push(data);
+    // console.log(data.email);
+    if(!newdata){
+        res.send({message: "try agaian"});
+    }
+    else{
+        res.send({ message: 'Data added successfully' });
+    }
+   
 });
 
 module.exports = router; 
+// done 
